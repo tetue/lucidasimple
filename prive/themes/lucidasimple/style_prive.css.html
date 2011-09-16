@@ -91,6 +91,7 @@ body { background: #F5F5F5; }
 .editer_display_navigation { display: none; }
 
 /* navigation */
+#bando_identite { text-shadow: 1px 1px 0 #FFF; }
 .navigation_avec_icones #bando_navigation ul li ul li a { margin: 0; padding: 8px 10px 8px 25px; background-position: 5px 50%; line-height: 1; }
 #bando_navigation ul.deroulant > li { max-height: 80px; overflow: hidden; }
 #bando_navigation ul li a { margin: 0; padding: 0; text-indent: -9999px; }
@@ -288,18 +289,19 @@ body.navigation #navigation { display: none; }
 
 .highlight { background: none; }
 .highlight .inner { border: 0; border-radius: 10px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); background-image: url(#CHEMIN{prive/themes/lucidasimple/img/background.png}); }
-.highlight .inner .hd { padding-bottom: 0; color: #FFF; font-size: 1.3em !important; }
+.highlight .inner .hd { padding-bottom: 0; color: #FFF; font-size: 1.3em !important; text-shadow: 0 1px 1px #999; }
 .highlight .inner .bd { padding-top: 0; }
 .highlight .inner .liste-objets { margin: 9px 0 0; }
 .highlight .inner .bd > a:last-child { display: none; }
 
 #navigation .box.simple .inner { border: 2px solid #CCC; border-radius: 10px; /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);*/ }
-#navigation .box.simple .inner h3 { font-size: 110% !important; }
+#navigation .box.simple .inner h3 { font-size: 110% !important; font-weight: bold; }
 #navigation .box.simple .inner .hd { padding-bottom: 0; }
 #navigation .box.simple .inner .bd { padding-top: 0; }
 #navigation .box.simple .inner p { clear: both; margin: 0; }
-#navigation .personnel .icone { padding-left: 2px; }
+#navigation .personnel .icone { padding-left: 0; }
 #navigation .personnel .icone img { display: none; }
+#navigation .personnel p { margin-bottom: 5px !important; font-style: italic; color: #666; }
 #navigation .logo_du_site img { display: block; margin: 9px 0;  }
 
 .spip_logos,
