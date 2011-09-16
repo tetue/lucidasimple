@@ -1,0 +1,288 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+[(#REM)<style>
+/* --------------------------------------------------------------
+
+   typo.css.html
+   Base typographique
+   Cf.: http://www.spip-contrib.net/3820
+
+-------------------------------------------------------------- */
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+
+/* Valeurs par defaut :
+#SET{font-size,#ENV{font-size,1em}} [ font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.2em}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,1.2em}} [ margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [ text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Verdana, Geneva, sans-serif'}} [ font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [ background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [ color: (#GET{color});]
+*/
+
+html { font-size: 100.01%; } /* pour IE < 6 */
+/* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ et http://forum.alsacreations.com/topic-4-54377-1.html */
+body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
+
+/* Titraille / Intertitres */
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5,
+h6,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
+
+/* Titraille Blueprint
+Cf. : http://www.blueprintcss.org/tests/parts/elements.html
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }*/
+
+h1,.h1 {font-size: 2em; line-height:#GET{line-height};margin-bottom: [(#GET{margin-bottom}|div{2})em]; }
+#SET{coeff,#GET{line-height}|plus{2}|div{2}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h2,.h2 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv}|mult{2})em];[ margin-bottom: (#GET{coeffinv})em;]}
+h3,.h3 {[ font-size: (#GET{line-height}|mult{1})em]; line-height: 1; margin-bottom: 1em; }
+#SET{coeff,#GET{line-height}|plus{1}|div{2}|div{#GET{line-height}}}
+#SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
+h4,.h4 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;] }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
+h6,.h6 { font-size: 1em; font-weight: bold; }
+
+/* Enrichissements typographiques */
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
+small, .small { font-size: 90%; }
+big, .big { font-size: 130%; }
+abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
+@media print { abbr[title]:after { content: " (" attr(title) ")"; } }
+dfn { font-weight: bold; font-style: italic; }
+del, .del { text-decoration: line-through; }
+ins, .ins { text-decoration: none; background-color: #fbe3e4; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+.ie sup { vertical-align: text-top; }
+sub { vertical-align: sub; }
+.ie sub { vertical-align: text-bottom; }
+.caps { font-variant: small-caps; }
+
+/* Listes */
+ul, ol, li, dl, dt, dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+dl dt { font-weight: bold; }
+dl dd {}
+
+/* Tableaux */
+table {}
+caption { background: #EEE; }
+th { font-weight: bold; }
+thead th { background: #DDD; }
+th,td,caption {[ padding: (#GET{line-height}|div{2})em;] }
+tbody tr:nth-child(even) th,
+tbody tr:nth-child(even) td,
+tbody tr.even th,
+tbody tr.even td { background: #EEE; }
+tfoot { font-style: italic; }
+
+/* Citations, code et poesie */
+q { font-style: italic; }
+blockquote { padding: 0 #GET{text-indent}; font-style: italic; }
+cite { font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+pre { margin:[ (#GET{margin-bottom}) ]0;
+	/* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
+	white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-line;      /* CSS 3.0 */
+	white-space: -pre-wrap;     /* Opera 4-6 */
+	white-space: -o-pre-wrap;   /* Opera 7 */
+	white-space: -moz-pre-wrap; /* Mozilla */
+	white-space: -hp-pre-wrap;  /* HP Printers */
+	word-wrap: break-word;      /* IE 5+ */
+}
+kbd { background-color: #GET{color}; color: #GET{background-color}; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: #GET{margin-bottom}; }
+
+/* Liens */
+a {}
+a:hover {}
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+@media print {
+	a, a:visited { color: #GET{color}; text-decoration: underline; }
+	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+}
+
+.on { font-weight: bold; }
+
+/**
+* Print styles from HTML5 Boilerplate
+* Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+*/
+@media print {
+	pre, blockquote { page-break-inside: avoid; }
+	thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+	tr, img { page-break-inside: avoid; }
+	@page { margin: 0.5cm; }
+	p, h2, h3 { orphans: 3; widows: 3; }
+	h2, h3 { page-break-after: avoid; }
+}
+
+/* end */
+
+/* Listes SPIP */
+ul.spip,
+ol.spip { margin-left: #GET{text-indent}; }
+ul.spip { list-style-type: square; }
+li ul.spip { list-style-type: disc; }
+li li ul.spip { list-style-type: circle; }
+ol.spip { list-style-type: decimal; }
+
+dl.spip dt,
+dl.spip dd { padding-left: #GET{text-indent}; }
+dl.spip dt { clear: both; }
+dl.spip dd {}
+
+/* Tableaux SPIP */
+table.spip { margin-bottom: #GET{margin-bottom}; width: 100%; }
+table.spip caption {}
+table.spip tr.row_first th {}
+table.spip tr.odd td {}
+table.spip tr.even td {}
+
+/* Citations, code et poesie */
+blockquote.spip {}
+.spip_poesie {}
+.spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
+.spip_code,
+.spip_cadre { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+
+/* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
+sc, .sc { font-variant: small-caps; }
+.caractencadre-spip { color: purple; }
+.caractencadre2-spip { color: orange; }
+.texteencadre-spip { display: block; margin:[ (#GET{margin-bottom})][ (#GET{text-indent})]; padding: #GET{line-height}; background: #EEE; }
+
+/* Logos, documents et images */
+.spip_logos { float: left; margin: 0 10px 10px 0; padding: 0; border: none; }
+
+.spip_documents { margin-bottom: #GET{margin-bottom}; padding: 0; background: none; }
+.spip_documents,
+.spip_documents_center,
+.spip_doc_titre,
+.spip_doc_descriptif { margin-right: auto; margin-left: auto; text-align: center; }
+.spip_documents_center { clear: both; display: block; width: 100%; }
+.spip_documents_left { float: left; margin-right: #GET{margin-bottom}; }
+.spip_documents_right { float: right; margin-left: #GET{margin-bottom}; }
+.spip_doc_titre {}
+.spip_doc_descriptif { clear: both; }
+
+/* Modeles par defaut */
+.spip_modele { float: right; display: block; width: 25%; margin: 0 0[ (#GET{margin-bottom})][ (#GET{margin-bottom})]; padding: #GET{line-height}; background: #EEE; }
+
+/* Formulaires */
+.formulaire_spip {}
+.formulaire_spip li { clear: both;[ margin-bottom: (#GET{margin-bottom}|div{2})em;] }
+.formulaire_spip .boutons { clear: both; margin: 0; padding: 0; }
+.formulaire_spip .boutons input,
+.formulaire_spip .boutons button {}
+@media print {
+	.formulaire_spip { display: none; }
+}
+
+/* Barre typo */
+.markItUp .markItUpHeader ul .markItUpSeparator { display: none; }
+
+/* Previsu */
+.previsu { margin-bottom: #GET{margin-bottom};[ padding: (#GET{margin-bottom}|div{2})em;] border: 2px dashed #F57900; }
+fieldset.previsu legend { color: #F57900; }
+
+/* Reponses */
+.reponse_formulaire { margin-bottom: #GET{margin-bottom};[ padding: (#GET{margin-bottom}|div{2})em;] border: 2px solid #ddd; }
+.reponse_formulaire_ok { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.reponse_formulaire_erreur { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.reponse_formulaire_ok a { color: #264409; }
+.reponse_formulaire_erreur a { color: #8a1f11; }
+
+.erreur_message { color: red; }
+
+li.erreur input[type="text"], li.erreur input.text,
+li.erreur input[type="password"], li.erreur input.password,
+li.erreur textarea { background-color: #fbe3e4; border-color: #fbc2c4; }
+
+.spip_surligne { background-color: yellow; }
+
+/* Formulaire de recherche */
+.formulaire_recherche * { display: inline; }
+
+/* Paragraphes */
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: #GET{margin-bottom}; }
+
+/* Pagination */
+.pagination { clear: both; text-align: center; }
+@media print {
+	.pagination { display: none; }
+}
+
+/* Liens de SPIP */
+a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
+a.spip_in {} /* liens internes */
+a.spip_mail {}
+a.spip_out {} /* liens sortants */
+a.spip_url {} /* liens url sortants */
+a.spip_glossaire {} /* liens vers encyclopedie */
+@media print {
+	a.spip_out:after,
+	a.spip_url:after { content: " (" attr(href) ")"; }
+}
+
+/* Boutons d'admin */
+.ie6 .spip-admin,
+.ie6 #spip-admin { display: none; }
+@media print {
+	.spip-admin,
+	#spip-admin { display: none; }
+}
+
+/* end */

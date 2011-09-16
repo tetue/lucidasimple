@@ -1,0 +1,356 @@
+[(#REM)<style>/*
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,.75em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.5em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'"Lucida Grande","Lucida Sans Unicode","Lucida Sans",Helvetica,sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+*/
+
+[(#REM) les vieux styles a evacuer en premier, ca permet qu'ils ne polluent pas en cas de double definition]
+
+[(#INCLURE{#VAL{clear.css}|find_in_theme|direction_css{#GET{dir}}})]
+[(#INCLURE{#VAL{layout.css}|find_in_theme|direction_css{#GET{dir}}})]
+
+<BOUCLE_css(POUR){tableau #LISTE{typo.css,grids.css,bando.css,icons.css,lists.css,forms.css,picker.css,box_skins.css,jquery-ui.css,content.css,exceptions.css,theme.css}}>
+[(#SET{fond,[(#VALEUR|concat{.html}|find_in_theme|substr{[(#VAL{_DIR_RACINE}|constant|strlen)],[(#VAL{-5}|intval)]})]})]
+/*
+ * #VALEUR::[(#GET{fond})]
+ */
+[(#GET{fond}|oui)
+	[(#INCLURE{fond=#GET{fond},env,couleur_claire,couleur_foncee,lang,ltr,claire=#GET{claire},foncee=#GET{foncee},left=#GET{left},right=#GET{right},rtl=#GET{rtl},dir=#GET{dir},font-size=#GET{font-size},line-height=#GET{line-height},margin-bottom=#GET{margin-bottom},text-indent=#GET{text-indent},font-family=#GET{font-family},background-color=#GET{background-color},color=#GET{color}})]
+]
+</BOUCLE_css>
+
+
+/*** Plugins ***/
+
+<BOUCLE_cssplugins(POUR){tableau #VAL{prive/}|find_all_in_path{/style_prive_plugin_}}>
+	#SET{fond,prive/#VALEUR|basename{'.html'}}
+	[(#INCLURE{fond=#GET{fond},env,couleur_claire,couleur_foncee,lang,ltr,claire=#GET{claire},foncee=#GET{foncee},left=#GET{left},right=#GET{right},rtl=#GET{rtl},dir=#GET{dir},font-size=#GET{font-size},line-height=#GET{line-height},margin-bottom=#GET{margin-bottom},text-indent=#GET{text-indent},font-family=#GET{font-family},background-color=#GET{background-color},color=#GET{color}})]
+</BOUCLE_cssplugins>
+
+/**** Plugins fin ***/
+
+
+
+/* Rustines SPIP 3 */
+
+body { background: #F5F5F5; }
+#pied { background: url(#CHEMIN{prive/themes/lucidasimple/img/bg.png}) repeat-x #FFF; }
+#bando_outils { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
+
+/* layout 2 colonnes pour tout le monde et basta */
+.largeur,
+.large .largeur,
+#conteneur,
+.table_page { width: 900px !important; }
+#navigation { float: right; width: 220px; }
+.large #contenu,
+#contenu { float: left; width: 650px; margin: 0; }
+.large #extra { display: none; }
+
+#haut { margin: 0; padding: 0; }
+#conteneur { margin-top: 30px; }
+
+.simple .inner { background-color: #FFF; border: 2px solid #EEE; border-radius: 10px 0 0 0; }
+
+/* * */
+.box, .liste-objets, .cadre-formulaire-editer, .formulaire_spip { margin-top: 0; }
+.error .inner, .success .inner, .notice .inner { border: 0; }
+.error .bd, .success .bd, .notice .bd { padding: 10px; background: none; }
+
+/* pas besoin de ça */
+.aide { display: none; }
+.plus_info { display: none !important; }
+#bando_outils ul.deroulant { display: none; }
+.collaborer { display: none; }
+.cadre-formulaire-editer .retour { display: none; }
+.editer_spip_ecran,
+.editer_display_navigation { display: none; }
+
+/* navigation */
+.navigation_avec_icones #bando_navigation ul li ul li a { margin: 0; padding: 8px 10px 8px 25px; background-position: 5px 50%; line-height: 1; }
+#bando_navigation ul.deroulant > li { max-height: 80px; overflow: hidden; }
+#bando_navigation ul li a { margin: 0; padding: 0; text-indent: -9999px; }
+#bando_navigation ul li li a { text-indent: 0; }
+.navigation_avec_icones #bando_navigation ul li a { }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_accueil { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat 0 0; }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_edition { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat -80px 0; }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_publication { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat -160px 0; }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_activite { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat -240px 0; }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_squelette { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat -320px 0; }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_administration { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat -400px 0; }
+.navigation_avec_icones #bando_navigation ul li a#bando1_menu_configuration { background: url(#CHEMIN{prive/themes/lucidasimple/img/bandeau.png}) no-repeat -480px 0; }
+
+/* moins d'icones partout ! */
+.caption { padding-left: 10px !important; background-image: none !important; }
+table.spip caption { margin: 0; }
+.cadre-icone { display: none; }
+.sous-rub .cadre-icone,
+.fiche_objet .cadre-icone { display: block; }
+
+.icone,
+.icone.horizontale { line-height: normal; }
+.icone.right { display: none; }
+.fiche_objet .icone.right { display: block; }
+
+/* tiraille plus discrete */
+h1, .h1, #haut h1, h1.grostitre { margin: 0 0 10px 0 !important; font-size: 2em; line-height: 1em; color: #222 !important; text-align: left; }
+h2,.h2,
+h3,.h3,.titrem,.caption,caption,
+h4,.h4, caption, .caption-wrap { margin: 0; padding: 0; line-height: 1.5; font-size: 1em !important; }
+.sous-rub h3.titrem { max-height: 16px; padding: 9px 20px !important; border-radius: 10px 0 0; font-size: 1.3em !important; }
+caption { padding: 0; background: none; }
+
+/* chemin plus discret */
+#chemin { margin: 10px 0; color: #999; }
+#chemin strong { font-weight: normal; }
+#chemin .bouton_deplacer { float: none; display: inline; padding: 0; }
+#chercher_rubrique { display: block; overflow: hidden; width: 90%; margin: 20px 0; padding: 15px 5%; background: #AEAEA0; border-radius: 10px; text-align: center; }
+#chercher_rubrique .inner,
+#chercher_rubrique .inner form,
+#chercher_rubrique .box,
+#chercher_rubrique .hd,
+#chercher_rubrique .bd { float: left; margin: 0 auto; padding: 0; background: none; border: 0; color: #FFF; vertical-align: middle; line-height: 1; }
+#chercher_rubrique .hd h3 { padding: 3px 0; }
+#chercher_rubrique .selecteur_parent { float: left; width: 400px; margin: 0 5px; font-size: 1em; }
+#chercher_rubrique .inner form * { float: left; }
+#chercher_rubrique .top,
+#chercher_rubrique .bottom,
+#chercher_rubrique .nettoyeur { display: none; }
+
+/* lisibilite pagination */
+.tri, .pagination { margin: 0; padding: 2px 10px; border: 0; color: #666; }
+.pagination .sep { display: none; }
+.pagination { font-weight: normal; }
+.pagination .on,
+.pagination .lien_pagination { padding: 3px 6px; background: #EEE; font-weight: normal; }
+.pagination .on,
+.pagination .lien_pagination:hover { background-color: #CCC; color: #FFF; text-decoration: none; }
+.pagination .on { background-color: #AAA; }
+
+/* lisibilite des formulaires */
+legend { background: none !important; font-weight: bold !important; }
+.formulaire_spip .explication { background: none; padding: 0; font-style: italic; color: #666; }
+.formulaire_spip ul { padding: 0; }
+.formulaire_spip li { margin: 0; }
+.formulaire_spip .editer_parent,
+.formulaire_spip .editer_groupe_mot,
+.formulaire_editer_auteur .editer_statut { margin-top: 0; }
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea { padding: 4px !important; background-color: #FFF !important; border: 1px solid #666 !important; color: #000 !important; font: normal normal 120%/1.5 'Courier New',Courier,monospace !important; }
+.formulaire_spip.formulaire_recherche { border: 0; }
+.formulaire_recherche a,
+.formulaire_recherche script { display: none; }
+#bando_outils #rapides .formulaire_recherche { margin: 0; }
+#bando_outils #rapides .formulaire_spip.formulaire_recherche .text { width: auto; min-height: 28px; background-color: #CCC !important; border-color: #CCC !important; text-align: right; }
+body.recherche #bando_outils #rapides .formulaire_spip.formulaire_recherche .text,
+#bando_outils #rapides .formulaire_spip.formulaire_recherche .text:focus { width: 300px; background-color: #FFF !important; border-color: #666 !important; text-align: left; }
+.formulaire_spip.formulaire_recherche .image { padding: 4px; }
+#contenu .formulaire_spip.formulaire_recherche { display: none; }
+
+.formulaire_spip .erreur { background-color: #FBE3E4 !important; }
+.formulaire_spip .erreur input.text,
+.formulaire_spip .erreur input.password,
+.formulaire_spip .erreur textarea,
+.formulaire_spip .erreur select { border-color: #8A1F11 !important; }
+
+.formulaire_spip h3.titrem { color: #FFF; font-size: 110% !important; }
+
+/* mieux signaler l'edition */
+.cadre-formulaire-editer { background: #EEE url(#CHEMIN{prive/themes/lucidasimple/img/background.png}); border-radius: 10px 10px 0 0; }
+.cadre-formulaire-editer .entete-formulaire { background: none; border-color: #CCC; border-radius: 10px 10px 0 0; }
+
+/* fiche identite */
+.info .inner { border-radius: 10px; }
+#navigation .infos .numero { font-size: 100%; }
+.infos .instituer_objet { border: 0; }
+.infos .formulaire_instituer .boutons { display: none; }
+.info .inner p { margin: 0; }
+
+/* * */
+.lat .formulaire_spip select { width: 100%; }
+.infos .formulaire_instituer .show select option { /*padding: 5px;*/ }
+
+/* allegement des onglets */
+.barre_onglet { text-align: left; padding: 0; }
+.barre_onglet li { margin: 0; padding: 0; border: 0 !important; }
+.barre_onglet a,
+.barre_onglet strong { margin: 0 5px 0 0; padding: 5px; }
+.barre_onglet a { background-color: #DDD; }
+
+/* allegement des listes */
+.liste_items,
+.liste-items,
+.liste_items .item,
+.liste-items .item { margin: 0; padding: 0; border: 0; }
+
+ul.forums li.item,
+ul.signatures li.item { margin: 0; }
+ul.forums li .cartouche .numero { font-style: normal; color: #333; }
+ul.forums li .checkbox,
+ul.signatures li .checkbox { top: 2.5em; }
+
+.liste-objets table td { vertical-align: top; }
+
+.liste-objets table caption,
+.caption-wrap { padding: 0; }
+
+/* mediatheque */
+body.documents #contenu,
+body.documents.large #contenu { width: 100%; }
+body.documents #conteneur { margin: 0; }
+
+.galerie h2 { padding-left: 0 !important; background: none !important; }
+.galerie table .infos { display: none; }
+.onglets_simple.second ul li strong,
+.onglets_simple.second ul li a { margin: 0; padding: 0 10px 0 0; background: none !important; border: 0; font-size: 100%; }
+.onglets_simple .medias a,
+.onglets_simple .medias strong { padding-left: 7px !important; background: none !important; }
+
+#portfolios .item { padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid #CCC; }
+#portfolios .tout_supprimer { display: block; margin: 5px; }
+
+/* plugins */
+.section { padding: 5px 10px; font-size: 100%; }
+.section, .section * { color: #FFF !important; }
+.important .inner { border-width: 2px; }
+.liste-plugins ul { margin: 0; }
+.liste-plugins .liste-items .item { padding-top: 5px; padding-bottom: 5px; border-top: 1px solid #CCC; }
+.liste-plugins .liste-items .item.on .short { display: none; }
+.liste-plugins .liste-items .item.on .resume { min-height: 0; }
+.liste-plugins .liste-items .item p { margin: 0 0 5px 0; }
+.liste-plugins .liste-items .item ul,
+.liste-plugins .liste-items .item li { margin: 0; list-style: inside; }
+.liste-plugins .liste-items .item a[rel=directory],
+.liste-plugins .liste-items .item a[rel=tag],
+.liste-plugins .liste-items .item .auteurs,
+.liste-plugins .liste-items .item .licence,
+.liste-plugins .liste-items .item .credits,
+.liste-plugins .liste-items .item .site,
+.liste-plugins .liste-items .item .tech { font-size: .9em; line-height: normal; color: #666; }
+
+/* sous-navigation centrale */
+body.navigation #navigation { display: none; }
+#navigation .sous_navigation { margin: 2.25em 0; }
+#contenu .liste_items.sous_navigation .item { clear: none; float: left; width: 300px; margin: 0 1em 1em 0; padding: 0; font-size: 1.3em; }
+#contenu .liste_items.sous_navigation .item a { margin: 0; padding: 1em; padding-left: 30px; background-color: #F3F3E6; background-position: 8px center; }
+#contenu .liste_items.sous_navigation .item a:hover { background-color: #C5AE58; color: #FFF; text-decoration: none; }
+
+/* identite du site */
+.configurer_identite #navigation { display: none; }
+.configurer_identite #contenu { float: none; margin: 0 auto; }
+
+/* vider cache */
+.admin_vider #navigation,
+.sauvegarder #navigation,
+.restaurer #navigation,
+.admin_tech #navigation,
+.job_queue #navigation { display: none; }
+.admin_vider #contenu,
+.sauvegarder #contenu,
+.restaurer #contenu,
+.admin_tech #contenu,
+.job_queue #contenu { float: none; /*margin: 0 auto;*/ }
+
+.formulaire_configurer_reducteur .vignette_reducteur { width: 150px; height: auto; }
+
+/* focus home */
+.accueil .liste-objets.articles thead,
+.accueil .liste-objets.articles .pagination { display: none; }
+
+.highlight { background: none; }
+.highlight .inner { border: 0; border-radius: 10px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); background-image: url(#CHEMIN{prive/themes/lucidasimple/img/background.png}); }
+.highlight .inner .hd { padding-bottom: 0; color: #FFF; font-size: 1.3em !important; }
+.highlight .inner .bd { padding-top: 0; }
+.highlight .inner .liste-objets { margin: 9px 0 0; }
+.highlight .inner .bd > a:last-child { display: none; }
+
+#navigation .box.simple .inner { border: 2px solid #CCC; border-radius: 10px; /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);*/ }
+#navigation .box.simple .inner h3 { font-size: 110% !important; }
+#navigation .box.simple .inner .hd { padding-bottom: 0; }
+#navigation .box.simple .inner .bd { padding-top: 0; }
+#navigation .box.simple .inner p { clear: both; margin: 0; }
+#navigation .personnel .icone { padding-left: 2px; }
+#navigation .personnel .icone img { display: none; }
+#navigation .logo_du_site img { display: block; margin: 9px 0;  }
+
+.spip_logos,
+.spip_logos img { float: none; display: block; max-width: 100px !important; height: auto !important; margin: 0 auto; }
+.formulaire_editer_logo { background: #FFF; }
+
+/* valoriser le contenu */
+.fiche_objet .formulaire_spip { margin: 0 0 10px 0; border-color: #CCC; }
+.fiche_objet .formulaire_spip.formulaire_dater { padding: 0; background: none; border: 0; }
+.fiche_objet .formulaire_spip.formulaire_dater .toggle_box_link { position: static; right: auto; top: auto; }
+.fiche_objet .liste-objets-lies thead { display: none; }
+.fiche_objet .liste-objets tr > .statut,
+.fiche_objet .liste-objets tr > .picto { display: none; }
+.fiche_objet .formulaire_spip .editer_date_redac { display: none; }
+.fiche_objet .formulaire_spip.formulaire_traduire { display: none; }
+.fiche_objet .formulaire_spip.formulaire_editer_liens .liste-objets caption,
+.fiche_objet .formulaire_spip.formulaire_editer_liens .liste-objets .action { display: none; }
+
+.article .fiche_objet #wysiwyg .champ.contenu_descriptif,
+.article .fiche_objet #wysiwyg .contenu_nom_site, 
+.article .fiche_objet #wysiwyg .contenu_ps { border: 0; padding: 1.5em; font-size: 1em; }
+.article .fiche_objet #wysiwyg .champ.contenu_descriptif, 
+.article .fiche_objet #wysiwyg .contenu_ps { padding-bottom: 1px; }
+.article .fiche_objet #wysiwyg .champ .label { display: none; }
+.article .fiche_objet #wysiwyg .champ.contenu_chapo,
+.article .fiche_objet #wysiwyg .champ.contenu_texte { font-size: 120%; line-height: 1.5em; }
+#wysiwyg .contenu_notes { margin-top: 1.5em; padding-top: 1.5em; line-height: inherit; font-size: 1em; }
+
+/* focus / Cf.: http://romy.tetue.net/678 */
+a:focus,
+a:active {
+	z-index: 999 !important;
+	background-color: black !important;
+	border-color: black !important;
+	text-decoration: none !important;
+	outline: none;
+}
+a:focus,
+a:active,
+* a:focus *,
+* a:active * {
+	color: white !important;
+}
+a:focus img,
+a:active img {
+	-moz-transform: translateY(1px); 
+	-webkit-transform: translateY(1px);
+	-o-transform: translateY(1px);
+	-ms-transform: translate(1px);
+	transform: translateY(1px);
+}
+
+#copyright { margin-bottom: 2em; }
+#copyright * { display: inline; }
+#copyright br { display: none; }
+
+/* end */
