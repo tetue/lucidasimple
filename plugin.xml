@@ -1,0 +1,40 @@
+<plugin
+	prefix="lucidasimple"
+	categorie="maintenance"
+	version="3.0"
+	etat="experimental"
+	compatibilite="[3.0.0-alpha2;["
+	logo="icon/icon.png"
+>	
+<nom>Lucida Simple</nom>
+<prefix>lucidasimple</prefix>
+<icon>icon/icon.png</icon>
+<etat>experimental</etat>
+<version>0.1</version>
+<!-- Rustine CSS expérimentale pour simplifier l'usage de l'espace privé de SPIP~3. -->
+<slogan>Rustine CSS expérimentale pour simplifier l'espace privé de SPIP~3.</slogan>
+<description>
+Rustine CSS expérimentale pour simplifier l'usage de l'espace privé de SPIP~3.
+
+Ce thème apporte&nbsp;:
+- meilleure lisibilité par la {{charte typo homogène}}, tout à la même taille, en &laquo;&nbsp;Lucida Grande&nbsp;&raquo;,
+- en simplifiant (moins de filets et de cadres, etc.)
+- {{deux colonnes}} permanentes, dans une plus grande largeur (900~px)
+- {{valorisation du contenu}}, qui passe en premier
+- distinction plus ostensible du mode édition
+- signalement du focus pour la {{navigation clavier}}
+
+Graphiquement&nbsp;: pas d'innovation, mais un retour de certains arrondis, avec parcimonie, en non sans nostalgie, en harmonie avec les icônes de Sébastien Desbenoît, qui sont grossies (mais moches, pardon, il faudra faire mieux).
+
+Qui dit simplicité, dit élagage&nbsp;: ce thème masque de nombreux pictos et boutons, dont l'aide contextuelle (mieux vaut rien qu'une aide périmée qui induit en erreur), mais aussi des choses inutiles (ce qui correspond à des préférences personnelles) comme le plongeur de rubriques et les outils de travail collaboratif interne (messagerie, agenda, etc.), mais je ne devrais pas le dire car vous n'allez pas vous en rendre compte. Notez que l'espace privé reste fonctionnellement inchangé et donc complètement utilisable.
+
+<code>/!\</code> Ce thème est expérimental&nbsp;: il n'est pas exemplaire et n'a pas vocation à persister.
+Attention : la portabilité multi-navigateur n'est pas assurée.
+
+<acronym title="Keep it Simple, Stupid" LANG="en">KISS</acronym>&nbsp;!
+</description>
+<auteur>[romy.tetue.net->http://romy.tetue.net] GPL 2011</auteur>
+<categorie>maintenance</categorie>
+<necessite id="SPIP" version="[3.0.0-alpha2;[" />
+<options>lucidasimple_options.php</options>
+</plugin>
