@@ -59,7 +59,6 @@ Valeurs par defaut :
 /* Rustines SPIP 3 */
 
 body { background: #F5F5F5; }
-#pied { background: url(#CHEMIN{prive/themes/lucidasimple/img/bg.png}) repeat-x #FFF; }
 #bando_outils { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); }
 
 /* layout 2 colonnes pour tout le monde et basta */
@@ -118,10 +117,10 @@ table.spip caption { margin: 0; }
 .fiche_objet .icone.right { display: block; }
 
 /* tiraille plus discrete */
-h1, .h1, #haut h1, h1.grostitre { margin: 0 0 10px 0 !important; font-size: 2em; line-height: 1em; color: #222 !important; text-align: left; }
+h1,.h1,#haut h1,h1.grostitre { margin: 0 0 10px 0 !important; font-size: 2em; line-height: 1em; color: #222 !important; text-align: left; }
 h2,.h2,
-h3,.h3,.titrem,.caption,caption,
-h4,.h4, caption, .caption-wrap { margin: 0; padding: 0; line-height: 1.5; font-size: 1em !important; }
+h3,.h3,.titrem,.caption,
+h4,.h4,caption,.caption-wrap { margin: 0; padding: 0; line-height: 1.5; font-size: 1em !important; }
 .sous-rub h3.titrem { max-height: 16px; padding: 9px 20px !important; border-radius: 10px 0 0; font-size: 1.3em !important; }
 caption { padding: 0; background: none; }
 
@@ -155,7 +154,8 @@ caption { padding: 0; background: none; }
 /* lisibilite des formulaires */
 legend { background: none !important; font-weight: bold !important; }
 .formulaire_spip .explication { background: none; padding: 0; font-style: italic; color: #666; }
-.formulaire_spip ul { padding: 0; }
+.formulaire_spip ul { padding: 0; list-style: none; }
+.formulaire_spip ul.spip { margin-bottom: 1.5em; list-style: inside; }
 .formulaire_spip li { margin: 0; }
 .formulaire_spip .editer_parent,
 .formulaire_spip .editer_groupe_mot,
@@ -203,6 +203,8 @@ body.recherche #bando_outils #rapides .formulaire_spip.formulaire_recherche .tex
 .barre_onglet strong { margin: 0 5px 0 0; padding: 5px; }
 .barre_onglet a { background-color: #DDD; }
 
+.onglets_simple ul li .on { background-color: transparent; }
+
 /* allegement des listes */
 .liste_items,
 .liste-items,
@@ -226,11 +228,12 @@ body.documents.large #contenu { width: 100%; }
 body.documents #conteneur { margin: 0; }
 
 .galerie h2 { padding-left: 0 !important; background: none !important; }
+.galerie table { margin: 0; }
 .galerie table .infos { display: none; }
+.onglets_simple .medias a,
+.onglets_simple .medias strong { padding-left: 7px !important; background-image: none !important; }
 .onglets_simple.second ul li strong,
 .onglets_simple.second ul li a { margin: 0; padding: 0 10px 0 0; background: none !important; border: 0; font-size: 100%; }
-.onglets_simple .medias a,
-.onglets_simple .medias strong { padding-left: 7px !important; background: none !important; }
 
 #portfolios .item { padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid #CCC; }
 #portfolios .tout_supprimer { display: block; margin: 5px; }
@@ -243,9 +246,9 @@ body.documents #conteneur { margin: 0; }
 .liste-plugins .liste-items .item { padding-top: 5px; padding-bottom: 5px; border-top: 1px solid #CCC; }
 .liste-plugins .liste-items .item.on .short { display: none; }
 .liste-plugins .liste-items .item.on .resume { min-height: 0; }
-.liste-plugins .liste-items .item p { margin: 0 0 5px 0; }
-.liste-plugins .liste-items .item ul,
-.liste-plugins .liste-items .item li { margin: 0; list-style: inside; }
+.liste-plugins .liste-items .item p,
+.liste-plugins .liste-items .item ul.spip { margin: 0 0 5px 0; list-style-position: inside; }
+.liste-plugins .liste-items .item li { margin: 0; }
 .liste-plugins .liste-items .item a[rel=directory],
 .liste-plugins .liste-items .item a[rel=tag],
 .liste-plugins .liste-items .item .auteurs,
@@ -349,7 +352,9 @@ a:active img {
 	transform: translateY(1px);
 }
 
-#copyright { margin-bottom: 2em; }
+/* pied */
+#pied { clear: both; padding-top: 1.5em; background: url(#CHEMIN{prive/themes/lucidasimple/img/bg.png}) repeat-x #FFF; border-top-width: 2px; }
+#copyright { padding: 0 0 160px; background: url(#CHEMIN{prive/themes/lucidasimple/img/polatouche.png}) no-repeat center center; }
 #copyright * { display: inline; }
 #copyright br { display: none; }
 
